@@ -1,0 +1,18 @@
+{
+  "Dialogue" : {
+    "0" : {
+      "Face" : "Surprised", 
+      "Text" : "Oh, hello! \nIt's been a while since i've seen a new face pop up here."
+    },
+    "1" : {
+      "Face" : "Neutral",
+      "Text" : "Well, you should probably be heading out then. \nThe exit should be through the hallway and down the stairs."
+    },
+    "2" : {
+      "Face" : "Neutral",
+      "Text" : "I'll be here if you need any help"
+    }
+  },
+  "Amount" : 2,
+  "NextDialogue" : true
+}

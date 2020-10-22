@@ -1,0 +1,12 @@
+[gd_scene format=2]
+
+[node name="Enemy" type="KinematicBody2D"]
+
+[node name="HurtCollision" type="Area2D" parent="."]
+
+[node name="AttackCollision" type="Area2D" parent="."]
+
+[node name="HurtTimer" type="Timer" parent="."]
+wait_time = 0.5
+[connection signal="body_entered" from="HurtCollision" to="." method="HurtCollision"]
+[connection signal="body_entered" from="AttackCollision" to="." method="AttackCollision"]

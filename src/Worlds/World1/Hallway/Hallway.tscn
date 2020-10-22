@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/Tiles/DungeonTileset.tres" type="TileSet" id=1]
+[ext_resource path="res://src/Ghosts/BlueMaskedGhost/Texture2.png" type="Texture" id=2]
+[ext_resource path="res://src/Ghosts/BlueMaskedGhost/Texture1.png" type="Texture" id=3]
+[ext_resource path="res://src/Worlds/World1/Hallway/Hallway.png" type="Texture" id=4]
+[ext_resource path="res://src/Scripts/NPC/NPC.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Worlds/World1/Sign.tscn" type="PackedScene" id=6]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[node name="Hallway" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+collision_layer = 0
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( -131079, 9, 0, -131078, 9, 0, -131077, 9, 0, -131076, 9, 0, -131075, 9, 0, -131074, 9, 0, -131073, 9, 0, -196608, 9, 0, -196607, 9, 0, -196606, 9, 0, -196605, 9, 0, -196604, 9, 0, -196603, 9, 0, -196602, 9, 0, -196601, 9, 0, -196600, 9, 0, -196599, 9, 0, -196598, 9, 0, -196597, 9, 0, -196596, 9, 0, -196595, 9, 0, -196594, 9, 0, -196593, 9, 0, -65543, 9, 0, -65542, 9, 0, -65541, 9, 0, -65540, 9, 0, -65539, 9, 0, -65538, 9, 0, -65537, 9, 0, -131072, 9, 0, -131071, 9, 0, -131070, 9, 0, -131069, 9, 0, -131068, 9, 0, -131067, 9, 0, -131066, 9, 0, -131065, 9, 0, -131064, 9, 0, -131063, 9, 0, -131062, 9, 0, -131061, 9, 0, -131060, 9, 0, -131059, 9, 0, -131058, 9, 0, -131057, 9, 0, -7, 9, 0, -6, 9, 0, -5, 9, 0, -4, 9, 0, -3, 9, 0, -2, 9, 0, -1, 9, 0, -65536, 9, 0, -65535, 9, 0, -65534, 9, 0, -65533, 9, 0, -65532, 9, 0, -65531, 9, 0, -65530, 9, 0, -65529, 9, 0, -65528, 9, 0, -65527, 9, 0, -65526, 9, 0, -65525, 9, 0, -65524, 9, 0, -65523, 9, 0, -65522, 9, 0, -65521, 9, 0, 65529, 9, 0, 65530, 9, 0, 65531, 9, 0, 65532, 9, 0, 65533, 9, 0, 65534, 9, 0, 65535, 9, 0, 8, 9, 0, 9, 9, 0, 10, 9, 0, 11, 9, 0, 12, 9, 0, 13, 9, 0, 14, 9, 0, 15, 9, 0, 131065, 9, 0, 131066, 9, 0, 131067, 9, 0, 131068, 9, 0, 131069, 9, 0, 131070, 9, 0, 131071, 9, 0, 65544, 9, 0, 65545, 9, 0, 65546, 9, 0, 65547, 9, 0, 65548, 9, 0, 65549, 9, 0, 65550, 9, 0, 65551, 9, 0, 196601, 9, 0, 196602, 9, 0, 196603, 9, 0, 196604, 9, 0, 196605, 9, 0, 196606, 9, 0, 196607, 9, 0, 131080, 9, 0, 131081, 9, 0, 131082, 9, 0, 131083, 9, 0, 131084, 9, 0, 131085, 9, 0, 131086, 9, 0, 131087, 9, 0, 262137, 9, 0, 262138, 9, 0, 262139, 9, 0, 262140, 9, 0, 262141, 9, 0, 262142, 9, 0, 262143, 9, 0, 196616, 9, 0, 196617, 9, 0, 196618, 9, 0, 196619, 9, 0, 196620, 9, 0, 196621, 9, 0, 196622, 9, 0, 196623, 9, 0, 327673, 9, 0, 327674, 9, 0, 327675, 9, 0, 327676, 9, 0, 327677, 9, 0, 327678, 9, 0, 327679, 9, 0, 262144, 9, 0, 262145, 9, 0, 262146, 9, 0, 262147, 9, 0, 262148, 9, 0, 262149, 9, 0, 262150, 9, 0, 262151, 9, 0, 262152, 9, 0, 262153, 9, 0, 262154, 9, 0, 262155, 9, 0, 262156, 9, 0, 262157, 9, 0, 262158, 9, 0, 262159, 9, 0, 393209, 9, 0, 393210, 9, 0, 393211, 9, 0, 393212, 9, 0, 393213, 9, 0, 393214, 9, 0, 393215, 9, 0, 327680, 9, 0, 327681, 9, 0, 327682, 9, 0, 327683, 9, 0, 327684, 9, 0, 327685, 9, 0, 327686, 9, 0, 327687, 9, 0, 327688, 9, 0, 327689, 9, 0, 327690, 9, 0, 327691, 9, 0, 327692, 9, 0, 327693, 9, 0, 327694, 9, 0, 327695, 9, 0, 458745, 9, 0, 458746, 9, 0, 458747, 9, 0, 458748, 9, 0, 458749, 9, 0, 458750, 9, 0, 458751, 9, 0, 393216, 9, 0, 393217, 9, 0, 393218, 9, 0, 393219, 9, 0, 393220, 9, 0, 393221, 9, 0, 393222, 9, 0, 393223, 9, 0, 393224, 9, 0, 393225, 9, 0, 393226, 9, 0, 393227, 9, 0, 393228, 9, 0, 393229, 9, 0, 393230, 9, 0, 393231, 9, 0, 524281, 9, 0, 524282, 9, 0, 524283, 9, 0, 524284, 9, 0, 524285, 9, 0, 524286, 9, 0, 524287, 9, 0, 458752, 9, 0, 458753, 9, 0, 458754, 9, 0, 458755, 9, 0, 458756, 9, 0, 458757, 9, 0, 458758, 9, 0, 458759, 9, 0, 458760, 9, 0, 458761, 9, 0, 458762, 9, 0, 458763, 9, 0, 458764, 9, 0, 458765, 9, 0, 458766, 9, 0, 458767, 9, 0 )
+
+[node name="World" type="Sprite" parent="."]
+texture = ExtResource( 4 )
+centered = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="World"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="World/StaticBody2D"]
+polygon = PoolVector2Array( 0, 41, 5, 41, 5, 4, 124, 4, 124, 41, 128, 41, 138, 41, 138, -4, -8, -5, -8, 38, -8, 41 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="World/StaticBody2D"]
+polygon = PoolVector2Array( -7, 59, 138, 59, 138, 67, -7, 66 )
+
+[node name="NPC" parent="." instance=ExtResource( 5 )]
+DialogueFiles = PoolStringArray( "res://src/Dialogue/World1/HallwayBlueGhost/Greet.json" )
+Facesfile = "res://src/Dialogue/World1/HallwayBlueGhost/Faces.json"
+hasDialouge = true
+
+[node name="Sprite" parent="NPC" index="0"]
+position = Vector2( 84, 46 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="NPC"]
+position = Vector2( 84, 55 )
+frames = SubResource( 1 )
+frame = 1
+playing = true
+flip_h = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="NPC"]
+polygon = PoolVector2Array( 88, 59, 79, 59, 79, 49, 88, 49 )
+
+[node name="Sign" parent="." instance=ExtResource( 6 )]
+position = Vector2( 64, 52 )
+DialogueFile = "res://src/Dialogue/World1/Signs/Hallway1.json"
+Facesfile = "res://src/Dialogue/Global/Sign/SignFaces.json"
+[connection signal="body_entered" from="NPC" to="NPC" method="OnBodyEntered"]
+[connection signal="body_exited" from="NPC" to="NPC" method="OnBodyExited"]
+[connection signal="body_exited" from="Sign" to="Sign" method="BodyExited"]
+
+[editable path="NPC"]

@@ -1,0 +1,10 @@
+{
+  "Dialogue" : {
+    "0" : {
+      "Face" : "", 
+      "Text" : ""
+    }
+  },
+  "Amount" : 0,
+  "NextDialogue" : true
+}

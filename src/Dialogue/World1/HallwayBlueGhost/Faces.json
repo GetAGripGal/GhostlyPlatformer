@@ -1,0 +1,11 @@
+{
+  "Faces": {
+    "Neutral" : "res://src/Ghosts/BlueMaskedGhost/Faces/Neutral.png",
+    "Happy" : "res://src/Ghosts/BlueMaskedGhost/Faces/Happy.png",
+    "Sad" : "res://src/Ghosts/BlueMaskedGhost/Faces/Sad.png",
+    "Surprised": "res://src/Ghosts/BlueMaskedGhost/Faces/Surprised.png",
+    "Confused" : "res://src/Ghosts/BlueMaskedGhost/Faces/Confused.png",
+    "Annoyed" : "res://src/Ghosts/BlueMaskedGhost/Faces/Annoyed.png",
+    "Saddened" : "res://src/Ghosts/BlueMaskedGhost/Faces/Saddened.png"
+  }
+}

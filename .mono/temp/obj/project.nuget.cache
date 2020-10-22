@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "zH6mCvt/tw5/GSLLVdkGerH7StectnmGHFL78JqTL+uqw2nnQCSkdRgNW4MWzhKXkf6a6Bv8JBMQZqXTfAYfuA==",
+  "success": true,
+  "projectFilePath": "/media/comlarsic/9CC2-5E4B/Projects/godot/GhostlyPlatformer/GhostlyPlatformer.csproj",
+  "expectedPackageFiles": [
+    "/home/comlarsic/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
+    "/home/comlarsic/.nuget/packages/newtonsoft.json/12.0.3/newtonsoft.json.12.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,11 @@
+{
+  "Dialogue" : {
+    "0" : {
+      "Face" : "Neutral",
+      "Text" : "Left: Guest Room\nRight: Entrance"
+    }
+  },
+  "Amount" : 0,
+  "NextDialogue" : true
+  
+}

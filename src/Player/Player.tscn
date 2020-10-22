@@ -1,0 +1,192 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://src/PurpleMaskedGhost/Texture7.png" type="Texture" id=1]
+[ext_resource path="res://src/PurpleMaskedGhost/Texture4.png" type="Texture" id=2]
+[ext_resource path="res://src/PurpleMaskedGhost/Texture1.png" type="Texture" id=3]
+[ext_resource path="res://src/PurpleMaskedGhost/Texture2.png" type="Texture" id=4]
+[ext_resource path="res://src/PurpleMaskedGhost/Texture6.png" type="Texture" id=5]
+[ext_resource path="res://src/PurpleMaskedGhost/Texture3.png" type="Texture" id=6]
+[ext_resource path="res://src/Player/Player.cs" type="Script" id=7]
+[ext_resource path="res://src/Ghosts/PurpleMaskedGhost/Texture9.png" type="Texture" id=8]
+[ext_resource path="res://src/Ghosts/PurpleMaskedGhost/Texture8.png" type="Texture" id=9]
+[ext_resource path="res://src/UI/HealthBar/Texture.png" type="Texture" id=10]
+[ext_resource path="res://src/UI/HealthBar/BarTexture.png" type="Texture" id=11]
+[ext_resource path="res://src/Fonts/pixeldroidBoticRegular.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://src/UI/HealthBar/Icon.png" type="Texture" id=13]
+[ext_resource path="res://src/Player/PlayerHud.cs" type="Script" id=14]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 9 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "Climb",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 2.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "CrouchWalk",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 6 ) ],
+"loop": true,
+"name": "Jump",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "Fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "CrouchIdle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "ClimbIdle",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 3, 2 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "Hurt"
+length = 0.3
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="DynamicFont" id=3]
+size = 48
+font_data = ExtResource( 12 )
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 7 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "Fall"
+playing = true
+
+[node name="Top" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -2 )
+shape = SubResource( 2 )
+
+[node name="Button" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2 )
+shape = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 0, -12 )
+zoom = Vector2( 0.15, 0.15 )
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+editor_draw_drag_margin = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Hurt = SubResource( 4 )
+anims/Idle = SubResource( 5 )
+
+[node name="AttackCollider" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackCollider"]
+polygon = PoolVector2Array( -3, 3, -3, 5, 3, 5, 3, 3 )
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="HurtTimer" type="Timer" parent="Timers"]
+wait_time = 0.5
+one_shot = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Health" type="Node" parent="UI/Control"]
+
+[node name="TextureProgress" type="TextureProgress" parent="UI/Control/Health"]
+margin_left = 72.0
+margin_top = -64.0
+margin_right = 112.0
+margin_bottom = -24.0
+rect_scale = Vector2( 8, 8 )
+texture_over = ExtResource( 10 )
+texture_progress = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Control/Health"]
+margin_left = 68.0
+margin_top = 104.0
+margin_right = 364.0
+margin_bottom = 156.0
+custom_fonts/normal_font = SubResource( 3 )
+bbcode_enabled = true
+bbcode_text = "Curent/Max"
+text = "Curent/Max"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="UI/Control/Health"]
+position = Vector2( 136, 68 )
+scale = Vector2( 8, 8 )
+texture = ExtResource( 13 )
+
+[node name="HealthDelay" type="Timer" parent="UI/Control/Health"]
+wait_time = 0.01
+autostart = true
+[connection signal="body_entered" from="AttackCollider" to="." method="AttackCollider"]
+[connection signal="timeout" from="Timers/HurtTimer" to="." method="OnHurtTimer"]
+[connection signal="timeout" from="UI/Control/Health/HealthDelay" to="UI/Control" method="OnHealthDelay"]

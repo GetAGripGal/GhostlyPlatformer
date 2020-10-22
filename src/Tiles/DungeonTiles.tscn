@@ -1,0 +1,120 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://src/Tiles/DungeonWall.png" type="Texture" id=1]
+[ext_resource path="res://src/Tiles/LeftDungeonCorner.png" type="Texture" id=2]
+[ext_resource path="res://src/Tiles/DungeonBackground.png" type="Texture" id=3]
+[ext_resource path="res://src/Tiles/DungeonLeftWall.png" type="Texture" id=4]
+[ext_resource path="res://src/Tiles/DungeonRightWall.png" type="Texture" id=5]
+[ext_resource path="res://src/Tiles/DungeonCeiling.png" type="Texture" id=6]
+[ext_resource path="res://src/Tiles/RightBottomCornerDungeon.png" type="Texture" id=7]
+[ext_resource path="res://src/Tiles/RightDungeonCorner.png" type="Texture" id=8]
+[ext_resource path="res://src/Tiles/LeftTopDungeon.png" type="Texture" id=9]
+[ext_resource path="res://src/Tiles/Wall.png" type="Texture" id=10]
+[ext_resource path="res://src/Tiles/LeftDungeonStair.png" type="Texture" id=11]
+[ext_resource path="res://src/Tiles/RightDungeonStair.png" type="Texture" id=12]
+
+[node name="DungeonTiles" type="Node2D"]
+
+[node name="DungeonLeftBottom" type="Sprite" parent="."]
+position = Vector2( 8, 24 )
+texture = ExtResource( 2 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="DungeonLeftBottom"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DungeonLeftBottom/StaticBody2D"]
+polygon = PoolVector2Array( -8, -8, -1, -8, -1, 1, 8, 1, 8, 8, -8, 8 )
+
+[node name="DungeonRightBottom" type="Sprite" parent="."]
+position = Vector2( 24, 24 )
+texture = ExtResource( 7 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="DungeonRightBottom"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DungeonRightBottom/StaticBody2D"]
+polygon = PoolVector2Array( 1, 1, 1, -8, 8, -8, 8, 8, -8, 8, -8, 1 )
+
+[node name="DungeonLeftTop" type="Sprite" parent="."]
+position = Vector2( 8, 8 )
+texture = ExtResource( 9 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="DungeonLeftTop"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DungeonLeftTop/StaticBody2D"]
+polygon = PoolVector2Array( -8, -8, 8, -8, 8, -1, -1, -1, -1, 8, -8, 8 )
+
+[node name="DungeonRightTop" type="Sprite" parent="."]
+position = Vector2( 24, 8 )
+texture = ExtResource( 8 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="DungeonRightTop"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DungeonRightTop/StaticBody2D"]
+polygon = PoolVector2Array( -8, -1, -8, -8, 8, -8, 8, 8, 1, 8, 1, -1 )
+
+[node name="FloorBottom" type="Sprite" parent="."]
+position = Vector2( 48, 24 )
+texture = ExtResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="FloorBottom"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FloorBottom/StaticBody2D"]
+polygon = PoolVector2Array( -8, 1, 8, 1, 8, 8, -8, 8 )
+
+[node name="FloorTop" type="Sprite" parent="."]
+position = Vector2( 48, 8 )
+texture = ExtResource( 6 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="FloorTop"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FloorTop/StaticBody2D"]
+position = Vector2( 0, -9 )
+polygon = PoolVector2Array( -8, 1, 8, 1, 8, 8, -8, 8 )
+
+[node name="WallLeft" type="Sprite" parent="."]
+position = Vector2( 40, 16 )
+texture = ExtResource( 4 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WallLeft"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WallLeft/StaticBody2D"]
+polygon = PoolVector2Array( -8, -8, -1, -8, -1, 8, -8, 8 )
+
+[node name="WallRight" type="Sprite" parent="."]
+position = Vector2( 56, 16 )
+texture = ExtResource( 5 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="WallRight"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WallRight/StaticBody2D"]
+polygon = PoolVector2Array( 1, -8, 8, -8, 8, 8, 1, 8 )
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 48, 16 )
+texture = ExtResource( 3 )
+
+[node name="Wall" type="Sprite" parent="."]
+position = Vector2( 16, 16 )
+texture = ExtResource( 10 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Wall/StaticBody2D"]
+polygon = PoolVector2Array( -8, -8, 8, -8, 8, 8, -8, 8 )
+
+[node name="RightStair" type="Sprite" parent="."]
+position = Vector2( 93, 23 )
+texture = ExtResource( 12 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="RightStair"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RightStair/StaticBody2D"]
+polygon = PoolVector2Array( -10, 8, 8, -10, 8, 8 )
+
+[node name="LeftStair" type="Sprite" parent="."]
+position = Vector2( 73, 23 )
+texture = ExtResource( 11 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LeftStair"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LeftStair/StaticBody2D"]
+polygon = PoolVector2Array( -8, 8, -8, -10, 10, 8 )
