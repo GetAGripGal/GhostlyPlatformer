@@ -1,8 +1,0 @@
-/media/comlarsic/9CC2-5E4B/Projects/godot/GhostlyPlatformer/.mono/temp/bin/Debug/GhostlyPlatformer.dll
-/media/comlarsic/9CC2-5E4B/Projects/godot/GhostlyPlatformer/.mono/temp/bin/Debug/GhostlyPlatformer.pdb
-/media/comlarsic/9CC2-5E4B/Projects/godot/GhostlyPlatformer/.mono/temp/obj/Debug/GhostlyPlatformer.csprojAssemblyReference.cache
-/media/comlarsic/9CC2-5E4B/Projects/godot/GhostlyPlatformer/.mono/temp/obj/Debug/GhostlyPlatformer.csproj.CoreCompileInputs.cache
-/media/comlarsic/9CC2-5E4B/Projects/godot/GhostlyPlatformer/.mono/temp/obj/Debug/GhostlyPlatformer.dll
-/media/comlarsic/9CC2-5E4B/Projects/godot/GhostlyPlatformer/.mono/temp/obj/Debug/GhostlyPlatformer.pdb
-/media/comlarsic/9CC2-5E4B/Projects/godot/GhostlyPlatformer/.mono/temp/bin/Debug/Newtonsoft.Json.dll
-/media/comlarsic/9CC2-5E4B/Projects/godot/GhostlyPlatformer/.mono/temp/obj/Debug/GhostlyPlatformer.csproj.CopyComplete
