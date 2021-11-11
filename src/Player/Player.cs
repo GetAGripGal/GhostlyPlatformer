@@ -1,6 +1,10 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using GhostlyPlatformer;
+using GhostlyPlatformer.Items;
 using GhostlyPlatformer.Player;
+using GhostlyPlatformer.Scripts;
 
 public class Player : KinematicBody2D
 {
@@ -19,86 +23,111 @@ public class Player : KinematicBody2D
     public float Health = 20;
     public bool CanGetHurt = true;
 
-    private Timer HurtTimer;
+    private PlayerHud _ui;
+    private Dialogue _itemBox;
+
+    private Area2D _swipeAttacker;
+
+    private Timer _hurtTimer;
+    private Area2D _interactCollider;
+
+    [Export()] private string[] _itemIDs = new string[5];
+    public List<Item> Inventory = new List<Item>(5);
     
     public override void _Ready()
     {
         Controller = new PlayerController(this);
         AnimationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         AnimatedSprite = GetNode<AnimatedSprite>("AnimatedSprite");
+        
         Camera = GetNode<Camera2D>("Camera2D");
 
-        HurtTimer = GetNode<Timer>("Timers/HurtTimer");
-        
-        Health *= PlayerLevel + .25f;
+        _ui = GetNode<PlayerHud>("UI/Control");
+        _itemBox = _ui.GetNode<Dialogue>("ItemAlert/DialogueBox");
 
-        if (CurrentCamera)
+        _hurtTimer = GetNode<Timer>("Timers/HurtTimer");
+        _swipeAttacker = GetNode<Area2D>("SwipeAttacker");
+
+        _interactCollider = GetNode<Area2D>("InteractCollider");
+        
+        MaxHealth = Health = 20;
+
+        if (Inventory.Count <= 0) return;
+        foreach (var id in _itemIDs)
         {
-            Camera.Current = true;
+            Inventory.Add(Database.Items[id]);
         }
     }
 
     public override void _Process(float delta)
     {
         PlayerLogic();
+        Camera.Current = CurrentCamera;
+        
+        foreach (var item in Inventory)
+        {
+            GD.Print(item.Name);
+        }
     }
 
     public override void _PhysicsProcess(float delta)
     {
-        if (CanMove)
-        {
-            HandleAnimations();
-            Controller.MovePlayer(delta);
-        }
+        if (!CanMove) return;
+        
+        AttackHandler();
+        HandleAnimations();
+        Controller.MovePlayer(delta);
     }
 
-    public void HandleAnimations()
+    public override void _Input(InputEvent @event)
     {
-        if ((Input.IsActionPressed("PlayerLeft") || Input.IsActionPressed("PlayerRight")) && IsOnFloor())
-        {
-            AnimatedSprite.Play("Walk");
-        }
+        if (!CanMove) return;
+        if (!Input.IsActionJustPressed("PlayerAction")) return;
+        
+        var collidingInteractable = _interactCollider.GetOverlappingAreas()[0];
+        if (!(collidingInteractable is Interactable interactable)) return;
+        interactable.Interact(this);
+    }
 
-        if ((Input.IsActionPressed("PlayerCrouch") || Controller.topRay.IsColliding()) && IsOnFloor())
-        {
-            if(Input.IsActionPressed("PlayerLeft") || Input.IsActionPressed("PlayerRight"))
-                AnimatedSprite.Play("CrouchWalk");
-            else
-                AnimatedSprite.Play("CrouchIdle");
-        }
+    private void HandleAnimations()
+    {
+        if ((Input.IsActionPressed("PlayerCrouch") || Controller.topRay.IsColliding()) && IsOnFloor()) 
+            AnimatedSprite.Play (Controller.velocity.x != 0 ? "CrouchWalk" : "CrouchIdle");
+        else if ((Input.IsActionPressed("PlayerLeft") || Input.IsActionPressed("PlayerRight")) && IsOnFloor()) 
+            AnimatedSprite.Play("Walk");
 
         if (Controller.velocity.y < 0 && !(IsClimbing || IsOnFloor()))
-        {
-           AnimatedSprite.Play("Jump");
-        }
+            AnimatedSprite.Play("Jump");
         else if (Controller.velocity.y > 0 && !(IsClimbing || IsOnFloor()))
-        {
             AnimatedSprite.Play("Fall");
-        }
         else if (!(Input.IsActionPressed("PlayerLeft") || Input.IsActionPressed("PlayerRight") ||
                    Input.IsActionPressed("PlayerCrouch") || Controller.topRay.IsColliding()) && IsOnFloor())
-        {
             AnimatedSprite.Play("Idle");
-        }
 
-        if (Input.IsActionPressed("PlayerLeft"))
-            AnimatedSprite.FlipH = true;
-        else if (Input.IsActionPressed("PlayerRight"))
-            AnimatedSprite.FlipH = false;
+        if (Input.IsActionPressed("PlayerLeft")) AnimatedSprite.FlipH = true;
+        else if (Input.IsActionPressed("PlayerRight")) AnimatedSprite.FlipH = false;
     }
 
-    public void PlayerLogic()
+    private void PlayerLogic()
     {
-        if (Health <= 0)
+        if (Health <= 0) GetTree().ReloadCurrentScene();
+    }
+
+    private void AttackHandler()
+    {
+        if (Inventory.Contains(Database.Items["Weapons//Sword"]))
         {
-            GetTree().ReloadCurrentScene();
+            _swipeAttacker.Visible = true;
+            _swipeAttacker.LookAt(GetGlobalMousePosition());
+            return;
         }
+        
+        _swipeAttacker.Visible = false;
     }
-    
 
-    public void AttackCollider(PhysicsBody2D Body)
+    public void AttackCollider(PhysicsBody2D body)
     {
-        if (Body is Enemy)
+        if (body is Enemy)
         {
             Controller.BounceOff();
         }
@@ -106,13 +135,19 @@ public class Player : KinematicBody2D
 
     public void Hurt(float damageMultiplier)
     {
-        if (CanGetHurt)
-        {
-            Health -= PlayerLevel * damageMultiplier;
-            AnimationPlayer.Play("Hurt");
-            HurtTimer.Start();
-            CanGetHurt = false;
-        }
+        if (!CanGetHurt) return;
+        
+        Health -= PlayerLevel * damageMultiplier;
+        AnimationPlayer.Play("Hurt");
+        _hurtTimer.Start();
+        CanGetHurt = false;
+    }
+
+    public void ObtainItem(Item item)
+    {
+        _itemBox.PlayerBody = this;
+        _itemBox.ShowItemObtained(item);
+        Inventory.Add(item);
     }
 
     private void OnHurtTimer()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://src/PurpleMaskedGhost/Texture7.png" type="Texture" id=1]
 [ext_resource path="res://src/PurpleMaskedGhost/Texture4.png" type="Texture" id=2]
@@ -14,6 +14,10 @@
 [ext_resource path="res://src/Fonts/pixeldroidBoticRegular.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://src/UI/HealthBar/Icon.png" type="Texture" id=13]
 [ext_resource path="res://src/Player/PlayerHud.cs" type="Script" id=14]
+[ext_resource path="res://src/UI/Coin/Coin.png" type="Texture" id=15]
+[ext_resource path="res://src/UI/Coin/CoinBar.png" type="Texture" id=16]
+[ext_resource path="res://src/Scripts/DialougeBox/DialogueBox.tscn" type="PackedScene" id=17]
+[ext_resource path="res://src/Player/Sprites/AttackIndicator.png" type="Texture" id=18]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -35,7 +39,7 @@ animations = [ {
 "frames": [ ExtResource( 5 ), ExtResource( 1 ) ],
 "loop": true,
 "name": "CrouchWalk",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [ ExtResource( 6 ) ],
 "loop": true,
@@ -58,10 +62,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 3, 2 )
-
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "Hurt"
 length = 0.3
 loop = true
@@ -79,7 +80,7 @@ tracks/0/keys = {
 "values": [ true, false, true ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "Idle"
 length = 0.1
 tracks/0/type = "value"
@@ -95,9 +96,126 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 3, 2 )
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 4.0
+height = 0.0
+
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 8.0
+height = 0.0
+
+[sub_resource type="DynamicFont" id=5]
 size = 48
 font_data = ExtResource( 12 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 48
+font_data = ExtResource( 12 )
+
+[sub_resource type="Animation" id=7]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Health/TextureProgress:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 88, -64 ), Vector2( 88, -220 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Health/RichTextLabel:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 88, 104 ), Vector2( 88, -116 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Health/Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 150, 68 ), Vector2( 150, -115 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Coins:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -20, 0 ), Vector2( -20, -166 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Health/RichTextLabel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 88, -116 ), Vector2( 88, 104 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Health/TextureProgress:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 88, -220 ), Vector2( 88, -64 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Health/Sprite:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 150, -115 ), Vector2( 150, 72 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Coins:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -20, -166 ), Vector2( -20, 0 ) ]
+}
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 7 )
@@ -106,14 +224,6 @@ script = ExtResource( 7 )
 frames = SubResource( 1 )
 animation = "Fall"
 playing = true
-
-[node name="Top" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -2 )
-shape = SubResource( 2 )
-
-[node name="Button" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 2 )
-shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, -12 )
@@ -128,13 +238,38 @@ enabled = true
 cast_to = Vector2( 0, 3 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Hurt = SubResource( 4 )
-anims/Idle = SubResource( 5 )
+anims/Hurt = SubResource( 3 )
+anims/Idle = SubResource( 4 )
+
+[node name="Top" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -2 )
+shape = SubResource( 2 )
+
+[node name="Buttom" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 2 )
+shape = SubResource( 2 )
 
 [node name="AttackCollider" type="Area2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackCollider"]
 polygon = PoolVector2Array( -3, 3, -3, 5, 3, 5, 3, 3 )
+
+[node name="SwipeAttacker" type="Area2D" parent="."]
+modulate = Color( 1, 1, 1, 0.490196 )
+
+[node name="AttackIndicator" type="Sprite" parent="SwipeAttacker"]
+position = Vector2( 12, 0 )
+texture = ExtResource( 18 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwipeAttacker"]
+position = Vector2( 12, 0 )
+shape = SubResource( 9 )
+
+[node name="InteractCollider" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractCollider"]
+position = Vector2( 4, 0 )
+shape = SubResource( 10 )
 
 [node name="Timers" type="Node" parent="."]
 
@@ -152,12 +287,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Health" type="Node" parent="UI/Control"]
+[node name="Health" type="Node2D" parent="UI/Control"]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Control/Health"]
+margin_left = 88.0
+margin_top = 104.0
+margin_right = 384.0
+margin_bottom = 156.0
+custom_fonts/normal_font = SubResource( 5 )
+bbcode_enabled = true
+bbcode_text = "Curent/Max"
+text = "Curent/Max"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureProgress" type="TextureProgress" parent="UI/Control/Health"]
-margin_left = 72.0
+margin_left = 88.0
 margin_top = -64.0
-margin_right = 112.0
+margin_right = 128.0
 margin_bottom = -24.0
 rect_scale = Vector2( 8, 8 )
 texture_over = ExtResource( 10 )
@@ -166,27 +314,48 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RichTextLabel" type="RichTextLabel" parent="UI/Control/Health"]
-margin_left = 68.0
-margin_top = 104.0
-margin_right = 364.0
-margin_bottom = 156.0
-custom_fonts/normal_font = SubResource( 3 )
-bbcode_enabled = true
-bbcode_text = "Curent/Max"
-text = "Curent/Max"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Sprite" type="Sprite" parent="UI/Control/Health"]
-position = Vector2( 136, 68 )
+position = Vector2( 150, 72 )
 scale = Vector2( 8, 8 )
 texture = ExtResource( 13 )
 
 [node name="HealthDelay" type="Timer" parent="UI/Control/Health"]
 wait_time = 0.01
 autostart = true
+
+[node name="Coins" type="Node2D" parent="UI/Control"]
+position = Vector2( -20, 0 )
+
+[node name="CoinBar" type="Sprite" parent="UI/Control/Coins"]
+position = Vector2( 1140, 72 )
+scale = Vector2( 8, 8 )
+texture = ExtResource( 16 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/Control/Coins"]
+margin_left = 1024.0
+margin_top = 52.0
+margin_right = 1232.0
+margin_bottom = 96.0
+custom_fonts/normal_font = SubResource( 6 )
+bbcode_enabled = true
+bbcode_text = "0G"
+text = "0G"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Coin" type="Sprite" parent="UI/Control/Coins"]
+position = Vector2( 972, 76 )
+scale = Vector2( 8, 8 )
+texture = ExtResource( 15 )
+
+[node name="ItemAlert" type="Node2D" parent="UI/Control"]
+
+[node name="DialogueBox" parent="UI/Control/ItemAlert" instance=ExtResource( 17 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Control"]
+anims/MoveIn = SubResource( 7 )
+anims/MoveOut = SubResource( 8 )
 [connection signal="body_entered" from="AttackCollider" to="." method="AttackCollider"]
 [connection signal="timeout" from="Timers/HurtTimer" to="." method="OnHurtTimer"]
 [connection signal="timeout" from="UI/Control/Health/HealthDelay" to="UI/Control" method="OnHealthDelay"]

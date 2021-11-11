@@ -5,8 +5,6 @@
 [ext_resource path="res://src/Worlds/World1/World1.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/Fonts/pixeldroidBoticRegular.ttf" type="DynamicFontData" id=5]
 
-
-
 [sub_resource type="DynamicFont" id=1]
 size = 64
 extra_spacing_top = 2
@@ -43,19 +41,19 @@ margin_right = 480.0
 margin_bottom = 120.0
 custom_fonts/normal_font = SubResource( 1 )
 bbcode_enabled = true
-bbcode_text = "Ghostly 
-Platformer"
-text = "Ghostly 
-Platformer"
+bbcode_text = "Postmortem
+"
+text = "Postmortem
+"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PlayButton" type="LinkButton" parent="Control"]
 margin_left = 32.0
-margin_top = 200.0
+margin_top = 128.0
 margin_right = 292.0
-margin_bottom = 268.0
+margin_bottom = 196.0
 mouse_default_cursor_shape = 0
 custom_fonts/font = SubResource( 2 )
 action_mode = 0
@@ -67,9 +65,9 @@ __meta__ = {
 
 [node name="QuitButton" type="LinkButton" parent="Control"]
 margin_left = 32.0
-margin_top = 304.0
+margin_top = 232.0
 margin_right = 292.0
-margin_bottom = 372.0
+margin_bottom = 300.0
 custom_fonts/font = SubResource( 2 )
 text = "Quit"
 underline = 2

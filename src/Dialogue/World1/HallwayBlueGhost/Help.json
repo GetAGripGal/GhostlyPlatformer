@@ -1,0 +1,27 @@
+{
+  "Dialogue" : {
+    "0" : {
+      "Face" : "Surprised",
+      "Text" : "What? The door is locked?"
+    },
+    "1" : {
+      "Face" : "Surprised",
+      "Text" : "That's strange..."
+    },
+    "2" : {
+      "Face" : "Neutral",
+      "Text" : "I wonder who locked it..."
+    },
+    "3" : {
+      "Face" : "Neutral",
+      "Text" : "Maybe look into the other rooms? \nThere should be a key somewhere."
+    },
+    "4" : {
+      "Face" : "Neutral",
+      "Text" : "Here, take this. \nIt might help you on your way."
+    }
+  },
+  "Item" : "Keys//SwordKey",
+  "Amount" : 4,
+  "NextDialogue" : true
+}

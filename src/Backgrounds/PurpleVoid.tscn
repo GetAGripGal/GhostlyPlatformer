@@ -11,6 +11,7 @@ shader_type canvas_item;
 
 uniform vec3 color = vec3(0.35, 0.48, 0.95);
 uniform int OCTAVES = 4;
+varying float timeStep;
 
 float rand(vec2 coord){
 	return fract(sin(dot(coord, vec2(56, 78)) * 1000.0) * 1000.0);
@@ -44,10 +45,13 @@ float fbm(vec2 coord){
 }
 
 void fragment() {
+	
 	vec2 coord = UV * 20.0;
 
-	vec2 motion = vec2( fbm(coord + vec2(TIME * -0.5, TIME * 0.5)) );
-
+	vec2 motion = vec2( fbm(coord + vec2(timeStep* -0.5, (timeStep/10.0) * 0.5)) );
+	timeStep +=1 ;
+	if (timeStep > 100) timeStep = 0.0;
+	
 	float final = fbm(coord + motion);
 
 	COLOR = vec4(color, final * 0.5);
@@ -55,8 +59,6 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/color = Vector3( 0.35, 0.48, 0.95 )
-shader_param/OCTAVES = 4
 
 [node name="CanvasLayer" type="CanvasLayer"]
 

@@ -2,7 +2,7 @@
   "Dialogue" : {
     "0" : {
       "Face" : "Neutral",
-      "Text" : "Left: Guest Room\nRight: Entrance"
+      "Text" : "< Guest Room\n> Entrance"
     }
   },
   "Amount" : 0,

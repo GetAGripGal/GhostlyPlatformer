@@ -38,12 +38,14 @@ polygon = PoolVector2Array( 0, 41, 5, 41, 5, 4, 124, 4, 124, 41, 128, 41, 138, 4
 polygon = PoolVector2Array( -7, 59, 138, 59, 138, 67, -7, 66 )
 
 [node name="NPC" parent="." instance=ExtResource( 5 )]
-DialogueFiles = PoolStringArray( "res://src/Dialogue/World1/HallwayBlueGhost/Greet.json" )
-Facesfile = "res://src/Dialogue/World1/HallwayBlueGhost/Faces.json"
-hasDialouge = true
+position = Vector2( 8, 0 )
+_dialogueFiles = PoolStringArray( "res://src/Dialogue/World1/HallwayBlueGhost/Greet.json" )
+_facesfile = "src/Dialogue/World1/HallwayBlueGhost/Faces.json"
+_dialogueAmount = 1
+_hasDialouge = true
 
-[node name="Sprite" parent="NPC" index="0"]
-position = Vector2( 84, 46 )
+[node name="Sprite" parent="NPC/SpeakIcon" index="0"]
+position = Vector2( 83.5, 47 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="NPC"]
 position = Vector2( 84, 55 )
@@ -56,11 +58,13 @@ flip_h = true
 polygon = PoolVector2Array( 88, 59, 79, 59, 79, 49, 88, 49 )
 
 [node name="Sign" parent="." instance=ExtResource( 6 )]
-position = Vector2( 64, 52 )
-DialogueFile = "res://src/Dialogue/World1/Signs/Hallway1.json"
-Facesfile = "res://src/Dialogue/Global/Sign/SignFaces.json"
+position = Vector2( 59, 46 )
+_dialogueFile = "res://src/Dialogue/World1/Signs/Hallway1.json"
+_facesFile = "res://src/Dialogue/Global/Sign/SignFaces.json"
 [connection signal="body_entered" from="NPC" to="NPC" method="OnBodyEntered"]
 [connection signal="body_exited" from="NPC" to="NPC" method="OnBodyExited"]
 [connection signal="body_exited" from="Sign" to="Sign" method="BodyExited"]
 
 [editable path="NPC"]
+
+[editable path="NPC/SpeakIcon"]

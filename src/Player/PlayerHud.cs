@@ -8,7 +8,8 @@ public class PlayerHud : Control
     
     private TextureProgress HealthBar;
     private RichTextLabel HealthLabel;
-    private Tween UpdateTween;
+
+    private AnimationPlayer animationPlayer;
 
     private double OldHealth;
     
@@ -17,7 +18,9 @@ public class PlayerHud : Control
         PlayerBody = GetParent().GetParent<Player>();
         HealthBar = GetNode<TextureProgress>("Health/TextureProgress");
         HealthLabel = GetNode<RichTextLabel>("Health/RichTextLabel");
-
+        animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        
+        animationPlayer.Play("MoveOut");
         HealthBar.Value = PlayerBody.Health;
     }
 
@@ -27,7 +30,9 @@ public class PlayerHud : Control
 
         HealthLabel.BbcodeText = $"{HealthBar.Value}/{HealthBar.MaxValue}";
     }
-
+    
+    
+    
     public void OnHealthDelay()
     {
         HealthBar.Value = Mathf.Lerp((float)HealthBar.Value, PlayerBody.Health, .4f);
